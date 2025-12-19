@@ -1,0 +1,28 @@
+{
+  "name": "advanced-node-chat",
+  "type": "module",
+  "scripts": {
+    "start": "node cluster.js",
+    "dev": "nodemon cluster.js",
+    "profile": "node --prof server.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.13.0",
+    "dataloader": "^2.2.3",
+    "express": "^4.22.1",
+    "graphql": "^16.12.0",
+    "ioredis": "^5.8.2",
+    "lru-cache": "^10.4.3",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "cluster.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

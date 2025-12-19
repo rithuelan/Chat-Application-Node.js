@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat App</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    #chat { border: 1px solid #ccc; height: 300px; overflow-y: auto; padding: 10px; }
+    .my-message { color: blue; }
+    .other-message { color: green; }
+  </style>
+</head>
+<body>
+  <h2>Multi-User Chat</h2>
+  <div id="chat"></div>
+  <input id="message" placeholder="Type a message..." autocomplete="off"/>
+  <button id="send">Send</button>
+
+  <script>
+    const socket = io(); // Connect to server
+    const chatDiv = document.getElementById("chat");
+    const input = document.getElementById("message");
+    const button = document.getElementById("send");
+
+    const myId = socket.id;
+
+    // Send message
+    button.addEventListener("click", () => {
+      const msg = input.value;
+      if (!msg) return;
+      socket.emit("chat message", msg);
+      input.value = "";
+    });
+
+    // Receive message
+    socket.on("chat message", ({ id, text }) => {
+      const p = document.createElement("p");
+      p.textContent = text;
+      p.className = id === socket.id ? "my-message" : "other-message";
+      chatDiv.appendChild(p);
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+    });
+  </script>
+</body>
+</html>
